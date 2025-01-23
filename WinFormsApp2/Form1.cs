@@ -1,3 +1,5 @@
+using System.Diagnostics.Eventing.Reader;
+
 namespace WinFormsApp2
 {
     public partial class Form1 : Form
@@ -36,6 +38,7 @@ namespace WinFormsApp2
             GlobalVars.columnTemp = 0;
         }
 
+        // Number Buttons
         private void button1_Click(object sender, EventArgs e)
         {
             sifirla_number();
@@ -96,12 +99,14 @@ namespace WinFormsApp2
             textBox1.Text += 0;
         }
 
+        // Clear Button
         private void buttonc_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
             sifirla_tam();
         }
 
+        // Mathematical Operations Buttons
         private void buttonSum_Click(object sender, EventArgs e)
         {
             if (GlobalVars.tempislem != '\0')
@@ -169,6 +174,31 @@ namespace WinFormsApp2
             GlobalVars.tempNumber = value;
         }
 
+        private void buttonsin_Click(object sender, EventArgs e)
+        {
+            bool result = float.TryParse(textBox1.Text, out float value);
+            textBox1.Text = MathF.Sin(value).ToString();
+            GlobalVars.islemTakip = 1;
+        }
+
+        private void buttoncos_Click(object sender, EventArgs e)
+        {
+            bool result = float.TryParse(textBox1.Text, out float value);
+            textBox1.Text = MathF.Cos(value).ToString();
+            GlobalVars.islemTakip = 1;
+        }
+
+        private void buttonPercent_Click(object sender, EventArgs e)
+        {
+            bool result = Double.TryParse(textBox1.Text, out double value);
+            if (result)
+            {
+                textBox1.Text = Convert.ToString(value / 100);
+            }
+            GlobalVars.islemTakip = 1;
+        }
+
+        // Temprory Operations
         private double islem(char islem, double num1, double num2)
         {
             double sum = 0;
@@ -192,16 +222,7 @@ namespace WinFormsApp2
             return sum;
         }
 
-        private void buttonPercent_Click(object sender, EventArgs e)
-        {
-            bool result = Double.TryParse(textBox1.Text, out double value);
-            if (result)
-            {
-                textBox1.Text = Convert.ToString(value / 100);
-            }
-            GlobalVars.islemTakip = 1;
-        }
-
+        // (,) and Delete Buttons
         private void buttoncolumn_Click(object sender, EventArgs e)
         {
             sifirla_number();
@@ -215,20 +236,6 @@ namespace WinFormsApp2
         private void buttondel_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length-1);
-        }
-
-        private void buttonsin_Click(object sender, EventArgs e)
-        {
-            bool result = float.TryParse(textBox1.Text, out float value);
-            textBox1.Text = MathF.Sin(value).ToString();
-            GlobalVars.islemTakip = 1;
-        }
-
-        private void buttoncos_Click(object sender, EventArgs e)
-        {
-            bool result = float.TryParse(textBox1.Text, out float value);
-            textBox1.Text = MathF.Cos(value).ToString();
-            GlobalVars.islemTakip = 1;
         }
     }
 }
